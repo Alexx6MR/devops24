@@ -1,0 +1,14 @@
+---
+- name: Configure nginx from http to https
+  hosts: webserver
+  become: true
+  tasks:
+    - name: Copy https file into nginx
+      ansible.builtin.copy:
+        src: files/https.conf
+        dest: /etc/nginx/conf.d/
+        owner: root
+        group: root
+        mode: '0644'
+        backup: yes
+        

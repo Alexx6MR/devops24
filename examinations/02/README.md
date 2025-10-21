@@ -112,9 +112,13 @@ incompatibilities.
 
 What happens if you run `ansible-inventory --list` in the directory you created above?
 
+**Answer:** Displays the inventory that Ansible is currently using, in JSON format.
+
 ## QUESTION B
 
 What happens if you run `ansible-inventory --graph` in the directory you created above?
+
+**Answer:** Displays the same inventory information but in the form of an ASCII graph
 
 ## QUESTION C
 
