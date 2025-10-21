@@ -1,0 +1,37 @@
+---
+- name: Configure nginx from http to https
+  hosts: webserver
+  become: true
+  tasks:
+    - name: Ensure the nginx configuration is updated for example.internal
+      ansible.builtin.copy:
+        src: files/example.internal.conf
+        dest: /etc/nginx/conf.d/example.internal.conf
+        owner: root
+        group: root
+        mode: '0644'
+        backup: true
+      register: conf_result
+
+    - name: Create directory structure for example.internal
+      ansible.builtin.file:
+        path: /var/www/example.internal/html
+        state: directory
+        mode: '0755'
+      register: dir_result
+
+    - name: Ensure the index.html file is uploded for nginx
+      ansible.builtin.copy:
+        src: files/index.html
+        dest: /var/www/example.internal/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+        backup: true
+      register: html_result
+
+    - name: Restart nginx to apply new configuration
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+      when: conf_result.changed or html_result.changed

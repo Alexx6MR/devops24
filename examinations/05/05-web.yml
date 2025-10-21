@@ -7,8 +7,9 @@
       ansible.builtin.copy:
         src: files/https.conf
         dest: /etc/nginx/conf.d/
-        owner: root
-        group: root
-        mode: '0644'
-        backup: yes
-        
+        backup: true
+
+    - name: Restart nginx to apply new configuration
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

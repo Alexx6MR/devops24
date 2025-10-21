@@ -1,6 +1,6 @@
 ---
 - name: Set up self-signed certificates for HTTPS
-  hosts: web
+  hosts: webserver
   become: true
   tasks:
     - name: Ensure the /etc/pki/nginx directory exists
