@@ -33,7 +33,7 @@ webapp_password: secretpassword
 ```
 4. Run command:
 ```bash
-ansible-playbook 09-mariadb-password.yml -e @vars/secret.yml
+ansible-playbook 09-mariadb-password.yml
 ```
 
 ## QUESTION B

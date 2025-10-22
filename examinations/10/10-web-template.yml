@@ -1,0 +1,19 @@
+---
+- name: Configure nginx using a template
+  hosts: webserver
+  become: true
+  tasks:
+    - name: Ensure the that nginx render the vhost from template
+      ansible.builtin.template:
+        src: ./templates/example.internal.conf.j2
+        dest: /etc/nginx/conf.d/example.internal.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Reload nginx
+
+  handlers:
+    - name: Reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
