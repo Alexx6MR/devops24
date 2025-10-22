@@ -1,0 +1,20 @@
+---
+- name: Users creator into the web server
+  hosts: webserver
+  become: true
+  vars_files:
+    - vars/users_passwords.yml
+    - vars/users.yml
+
+  tasks:
+    - name: Ensure users exist with required supplementary groups
+      ansible.builtin.user:
+        name: "{{ item.username }}"
+        comment: "{{ item.realname }}" # <- GECOS is here
+        password: "{{ users_passwords[item.username] | password_hash('sha512', item.username) }}"
+        state: present
+        groups: "{{ item.groups }}"
+        append: false # secures exactly those groups (idempotent)
+        create_home: true
+
+      loop: "{{ users }}"

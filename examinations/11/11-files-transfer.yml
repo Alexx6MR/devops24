@@ -1,0 +1,14 @@
+---
+- name: Copy all .md files to deploy's home on dbserver
+  hosts: dbserver
+  become: true
+  tasks:
+    - name: Transfer files to dbserver
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "/home/deploy/{{ item | basename }}"
+        owner: deploy
+        group: deploy
+        mode: '0644'
+      with_fileglob:
+        - "files/*.md"
