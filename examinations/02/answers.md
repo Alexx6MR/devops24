@@ -1,6 +1,7 @@
 ## QUESTION A
 Displays the inventory that Ansible is currently using, in JSON format.
-```bash
+
+```json
 {
     "_meta": {
         "hostvars": {
@@ -73,8 +74,8 @@ The `ansible_connection=local` parameter tells Ansible to run modules directly o
 ```
 
 ## BONUS QUESTION 
-When you run `ansible-config dump` in your working directory where a local ansible.cfg exists, the output shows the effective configuration including your local values, for example, host_key_checking = False and inventory = hosts.
+When you run `ansible-config dump` in your working directory where a local ansible.cfg exists, the output shows the effective configuration including your local values, for example: `host_key_checking = False` and `inventory = hosts`.
 
-When you run it in your home directory, without a local ansible.cfg, the output reflects the system and user defaults, and your local changes are not applied.
+When you run it in your home directory, without a local `ansible.cfg`, the output reflects the system and user defaults and your local changes are not applied.
 
-In other words, ansible.cfg in the working directory overwrites the default values, while only the global and user values ​​are visible in the home directory.
+In other words, `ansible.cfg` in the working directory overwrites the default values while only the global and user values ​​are visible in the home directory.

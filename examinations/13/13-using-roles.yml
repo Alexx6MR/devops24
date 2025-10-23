@@ -1,0 +1,6 @@
+---
+- name: Configure the web server(s) according to specs
+  hosts: webserver
+  become: true
+  roles:
+    - webserver
