@@ -1,0 +1,33 @@
+---
+- name: Gather installed packages
+  ansible.builtin.package_facts:
+
+- name: Check for telnet-server
+  ansible.builtin.assert:
+    fail_msg: telnet-server package is installed
+    success_msg: telnet-server package is not installed
+    that: "'telnet-server' not in ansible_facts.packages"
+
+- name: Check for rsh-server
+  ansible.builtin.assert:
+    fail_msg: "rsh-server package is installed"
+    success_msg: "rsh-server package not installed"
+    that: "'rsh-server' not in ansible_facts.packages"
+
+- name: Check for tftp-server
+  ansible.builtin.assert:
+    fail_msg: "tftp-server package is installed"
+    success_msg: "tftp-server package not installed"
+    that: "'tftp-server' not in ansible_facts.packages"
+
+- name: Check for vsftpd-server
+  ansible.builtin.assert:
+    fail_msg: "vsftpd-server package is installed"
+    success_msg: "vsftpd-server package not installed"
+    that: "'vsftpd' not in ansible_facts.packages"
+
+- name: Check for xorg
+  ansible.builtin.assert:
+    fail_msg: "xorg is installed"
+    success_msg: "xorg not installed"
+    that: "'xorg-x11-server-Xorg' not in ansible_facts.packages"

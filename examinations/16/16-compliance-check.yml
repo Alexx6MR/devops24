@@ -1,0 +1,9 @@
+# 16-compliance-check.yml
+---
+- name: Security Compliance Checks (read-only)
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - cis_packages
+    - cis_services

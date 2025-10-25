@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - /home/alexei/Desktop/devops24/examinations/16/roles/cis_services

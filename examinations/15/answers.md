@@ -8,4 +8,5 @@ static_configs:
         - '192.168.121.248:9100'
         - '192.168.121.51:9100'
 ```
-2. Once changed, you just have to run the 10-node_exporter.yml playbook and that's it.
+
+1. Once changed, you just have to run the 10-node_exporter.yml playbook and that's it.

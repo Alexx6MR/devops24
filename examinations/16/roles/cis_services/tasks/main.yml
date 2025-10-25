@@ -1,0 +1,40 @@
+---
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Check for sshd is running
+  ansible.builtin.assert:
+    fail_msg: sshd not running
+    success_msg: sshd is running
+    that: "ansible_facts.services['sshd.service'].state == 'running'"
+
+- name: Check for sshd is enabled
+  ansible.builtin.assert:
+    fail_msg: sshd not enabled
+    success_msg: sshd enabled
+    that: "ansible_facts.services['sshd.service'].status == 'enabled'"
+
+
+- name: Check for firewalld is running
+  ansible.builtin.assert:
+    fail_msg: firewalld not running
+    success_msg: firewalld is running
+    that: "ansible_facts.services['firewalld.service'].state == 'running'"
+
+- name: Check for firewalld enabled
+  ansible.builtin.assert:
+    fail_msg: firewalld not enabled
+    success_msg: firewalld enabled
+    that: "ansible_facts.services['firewalld.service'].status == 'enabled'"
+
+- name: Check for  auditd running
+  ansible.builtin.assert:
+    fail_msg: auditd not running
+    success_msg: auditd running
+    that: "ansible_facts.services['auditd.service'].state == 'running'"
+
+- name: Check for auditd
+  ansible.builtin.assert:
+    fail_msg: auditd not enabled
+    success_msg: auditd enabled
+    that: "ansible_facts.services['auditd.service'].status == 'enabled'"
