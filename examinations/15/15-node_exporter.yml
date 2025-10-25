@@ -1,0 +1,91 @@
+---
+- name: Monitoring Configuration
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure node_exporter user exist
+      ansible.builtin.user:
+        name: node_exporter
+        comment: "System user for node_exporter"
+        state: present
+        shell: /sbin/nologin
+        system: true
+        create_home: false
+        group: node_exporter
+
+    - name: Ensure the node exporter installation file is on the server
+      ansible.builtin.copy:
+        src: "./files/node_exporter-1.9.1.linux-amd64/node_exporter"
+        dest: "/usr/sbin/node_exporter"
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Ensure the sysconfig file is in /etc/sysconfig/node_exporter
+      ansible.builtin.copy:
+        src: "./files/sysconfig.node_exporter"
+        dest: "/etc/sysconfig/node_exporter"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Ensure the *.service file is in /etc/systemd/system
+      ansible.builtin.copy:
+        src: "./files/node_exporter.service"
+        dest: "/etc/systemd/system/node_exporter.service"
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - Daemon reload
+        - Restart node_exporter
+
+    - name: Ensure the *.socket file is in /etc/systemd/system
+      ansible.builtin.copy:
+        src: "./files/node_exporter.socket"
+        dest: "/etc/systemd/system/node_exporter.socket"
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - Daemon reload
+
+    - name: Ensure the directory textfile collector exists
+      ansible.builtin.file:
+        path: /var/lib/node_exporter/textfile_collector
+        state: directory
+        owner: node_exporter
+        group: node_exporter
+        mode: '0755'
+
+    - name: Enable and start node_exporter
+      ansible.builtin.systemd:
+        name: node_exporter.service
+        enabled: true
+        state: started
+      notify:
+        - Daemon reload
+        - Restart node_exporter
+
+    - name: Ensure Node Exporter is started and enable from boot
+      ansible.builtin.service:
+        name: node_exporter
+        state: started
+        enabled: true
+
+    - name: Ensure that the port 9100 is accessible
+      ansible.posix.firewalld:
+        port: 9100/tcp
+        permanent: true
+        state: enabled
+        immediate: true
+
+  handlers:
+    - name: Daemon reload
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    - name: Restart node_exporter
+      ansible.builtin.systemd:
+        name: node_exporter
+        state: restarted
