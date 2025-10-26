@@ -1,0 +1,19 @@
+---
+- name: Test the Custom Anagrammer Module
+  hosts: localhost
+  become: true
+  vars:
+    message: " "
+
+  tasks:
+    - name: Run anagrammer module with the message variable
+      anagrammer:
+        message: "{{ message }}"
+      register: anagram_result
+
+    - name: Display the results
+      ansible.builtin.debug:
+        msg:
+          - "Original Message: {{ anagram_result.original_message }}"
+          - "Reversed Message: {{ anagram_result.reversed_message }}"
+          - "Changed Status: {{ anagram_result.changed }}"
