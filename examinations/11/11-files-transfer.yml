@@ -7,8 +7,5 @@
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "/home/deploy/{{ item | basename }}"
-        owner: deploy
-        group: deploy
-        mode: '0644'
       with_fileglob:
         - "files/*.md"

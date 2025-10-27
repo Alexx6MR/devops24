@@ -1,6 +1,7 @@
 ## QUESTION A
 Displays the inventory that Ansible is currently using, in JSON format.
 
+**output:**
 ```json
 {
     "_meta": {
@@ -37,6 +38,7 @@ Displays the inventory that Ansible is currently using, in JSON format.
 ## QUESTION B
 Displays the same inventory information but in the form of an ASCII graph.
 
+**output:**
 ```bash
 @all:
   |--@ungrouped:
@@ -49,6 +51,7 @@ Displays the same inventory information but in the form of an ASCII graph.
 ## QUESTION C
 The `ansible_connection=local` parameter tells Ansible to run modules directly on the machine where you are running Ansible, without using SSH.
 
+**output:**
 ```bash
 192.168.121.1 | SUCCESS => {
     "ansible_facts": {
@@ -74,8 +77,8 @@ The `ansible_connection=local` parameter tells Ansible to run modules directly o
 ```
 
 ## BONUS QUESTION 
-When you run `ansible-config dump` in your working directory where a local ansible.cfg exists, the output shows the effective configuration including your local values, for example: `host_key_checking = False` and `inventory = hosts`.
+When you run `ansible-config dump` in your working directory where a local ansible.cfg exists, the output shows the effective configuration including your local values, for example: `host_key_checking = False` and `CONFIG_FILE() = /home/alexei/Desktop/devops24/ansible/ansible.cfg`.
 
-When you run it in your home directory, without a local `ansible.cfg`, the output reflects the system and user defaults and your local changes are not applied.
+When you run it in your home directory, without a local `ansible.cfg`, the output reflects the system, user defaults and your local changes are not applied, exampel `CONFIG_FILE() = None`.
 
 In other words, `ansible.cfg` in the working directory overwrites the default values while only the global and user values ​​are visible in the home directory.

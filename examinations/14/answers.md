@@ -1,9 +1,9 @@
 ## QUESTION A
 In the `14-firewall.yml` file we gonna need 3 block.
-Every block will make a change in the on or both server.
+Every block will make a change in the one or both server.
 
 
-1. This block is to ensure that `firewalld` and `python3-firewall` is installed and running.
+1. This block is to ensure that `firewalld` and `python3-firewall` are installed and running.
 ```yml
 - name: Configure firewalld on all servers
   hosts: all
@@ -22,7 +22,7 @@ Every block will make a change in the on or both server.
         state: started
         enabled: true
 ```
-2. This block is to ensure that `http` and `http` is enabled in firewalld.
+2. This block is to ensure that `http` and `http` are enabled in firewalld.
 ```yml
 - name: Configure webserver firewall
   hosts: webserver
@@ -50,5 +50,4 @@ Every block will make a change in the on or both server.
         permanent: true
         state: enabled
         immediate: true
-
 ```

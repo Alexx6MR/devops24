@@ -1,8 +1,8 @@
 ## QUESTION A
-Add `state:started` to the service module.
-This tells Ansible that the service should be active (running) and enabled.
+If we add `state:started` to the service module. 
+This tells Ansible that the service should be active (running).
 
-```bash
+```yml
 - name: Ensure nginx is started at boot
   ansible.builtin.service:
     name: nginx
@@ -11,14 +11,13 @@ This tells Ansible that the service should be active (running) and enabled.
 ```
 
 ## QUESTION B
-Causes all tasks within the playbook to run as superuser (root), without having to type `become: true` in each task.
+Moving the `become: true` statement for a specific task to the top of the playbook allowed us to run each task as root and saved us from a lot of code repetition.
 
 
 ## QUESTION  C
-Because you can't first uninstall a service that's still running. You must stop and disable it before removing it.
-If you uninstall it while it's running, you may leave orphaned processes or errors in the system.
+To uninstall a service without breaking the server, the first thing we must do is disable and shut down the service. That's why we changed the order of things, first stopping and disabling the service and then uninstalling it. If you uninstall it while it's running, you could leave orphaned processes or errors in the system.
 
-```bash
+```yml
 ---
 - name: Uninstall a webserver
   hosts: web
@@ -40,8 +39,8 @@ If you uninstall it while it's running, you may leave orphaned processes or erro
 The name should clearly describe the action and purpose of the task, not what the code does internally.
 It should answer the question: "What does this task accomplish?"
 
-Exemepl
-```bash
+Examples of good names
+```yml
 Ensure nginx is installed 
 Remove vim, bash-completion, and qemu-guest-agent
 ```

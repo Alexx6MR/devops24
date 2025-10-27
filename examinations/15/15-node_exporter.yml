@@ -3,16 +3,22 @@
   hosts: all
   become: true
   tasks:
+    - name: Ensure node_exporter group exists
+      ansible.builtin.group:
+        name: node_exporter
+        state: present
+        system: true
+
     - name: Ensure node_exporter user exist
       ansible.builtin.user:
         name: node_exporter
         comment: "System user for node_exporter"
+        group: node_exporter
         state: present
         shell: /sbin/nologin
         system: true
         create_home: false
-        group: node_exporter
-
+        
     - name: Ensure the node exporter installation file is on the server
       ansible.builtin.copy:
         src: "./files/node_exporter-1.9.1.linux-amd64/node_exporter"
@@ -20,7 +26,7 @@
         owner: root
         group: root
         mode: '0755'
-
+        
     - name: Ensure the sysconfig file is in /etc/sysconfig/node_exporter
       ansible.builtin.copy:
         src: "./files/sysconfig.node_exporter"
@@ -35,10 +41,7 @@
         dest: "/etc/systemd/system/node_exporter.service"
         owner: root
         group: root
-        mode: '0644'
-      notify:
-        - Daemon reload
-        - Restart node_exporter
+        mode: '0644'        
 
     - name: Ensure the *.socket file is in /etc/systemd/system
       ansible.builtin.copy:
@@ -49,6 +52,7 @@
         mode: '0644'
       notify:
         - Daemon reload
+        - Restart node_exporter
 
     - name: Ensure the directory textfile collector exists
       ansible.builtin.file:
@@ -61,17 +65,11 @@
     - name: Enable and start node_exporter
       ansible.builtin.systemd:
         name: node_exporter.service
-        enabled: true
         state: started
+        enabled: true
       notify:
         - Daemon reload
         - Restart node_exporter
-
-    - name: Ensure Node Exporter is started and enable from boot
-      ansible.builtin.service:
-        name: node_exporter
-        state: started
-        enabled: true
 
     - name: Ensure that the port 9100 is accessible
       ansible.posix.firewalld:
@@ -87,5 +85,5 @@
 
     - name: Restart node_exporter
       ansible.builtin.systemd:
-        name: node_exporter
+        name: node_exporter.service
         state: restarted

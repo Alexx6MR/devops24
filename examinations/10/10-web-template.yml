@@ -7,9 +7,6 @@
       ansible.builtin.template:
         src: ./templates/example.internal.conf.j2
         dest: /etc/nginx/conf.d/example.internal.conf
-        owner: root
-        group: root
-        mode: '0644'
       notify: Reload nginx
 
   handlers:

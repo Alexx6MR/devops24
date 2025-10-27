@@ -73,7 +73,10 @@ foo.md
 ```
 >note: The destination is `/home/deploy/` so that the files are saved on the `deploy` user's home directory.
 
-3. Run the playbook.
+3. Run the command.
+```bash
+ansible-playbook ~/Desktop/devops24/examinations/11/11-files-transfer.yml
+```
 
 ## BONUS QUESTION 
 In the previously created directory `vars`, add another file called `user_passwords.yml`. The file will store the users password. I don't see it as a good practice to have the passwords for each user in plain text, although they will later be encrypted using `sha512`.
@@ -138,3 +141,6 @@ comment: "{{ item.realname }}" # <- GECOS is here
 password: "{{ users_pa....."
 ```
 3. Run the playbook for the last time and check in the server to se the results.
+```bash
+ansible-playbook ~/Desktop/devops24/examinations/11/11-users-creator.yml
+```

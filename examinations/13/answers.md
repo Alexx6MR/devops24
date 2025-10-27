@@ -1,19 +1,15 @@
 ## QUESTION A
 
 
-1. In the `tasks/main.yml` file, add the following code:
+1. In the `tasks/main.yml` file, add the following code to the last line:
 
 ```yml
 ---
-- name: Deploy nginx new websidan
+- name: Ensure web content present
   ansible.builtin.copy:
     src: files/index.html
     dest: /var/www/example.internal/html/index.html
-    owner: root
-    group: root
-    mode: '0644'
-  notify:
-    - Reload nginx
+  notify: Reload nginx
 ```
 2. In the `handlers/main.yml` file, add the following code:
 
@@ -25,7 +21,7 @@
     state: reloaded
 ```
 
-3. Inside the folder `files`, add a `index.html` file with some modifications.
+3. Inside the folder `files`, change the `index.html` file.
 4. Create the playbook file and run it. The content must be something like this:
 
 ```yml

@@ -33,7 +33,7 @@ webapp_password: secretpassword
 ```
 4. Run command:
 ```bash
-ansible-playbook 09-mariadb-password.yml
+ansible-playbook ~/Desktop/devops24/examinations/09/09-mariadb-password.yml
 ```
 
 ## QUESTION B
@@ -41,7 +41,7 @@ ansible-playbook 09-mariadb-password.yml
 1. Encrypts the existing variables file.
 
 ```bash
-ansible-vault encrypt vars/secret.yml
+ansible-vault encrypt ~/Desktop/devops24/examinations/09/vars/secret.yml
 ```
 > note: It will ask you for a Vault password (example: vaul123).
 
@@ -55,14 +55,14 @@ echo "vaul123" > vault_pass.txt
 ```bash
 cat vars/secret.yml
 ```
-**Expected result**
+**output**
 ```bash
 $ANSIBLE_VAULT;1.1;AES256
 6537323931663434623439336337356363363366623030303230636136623338...
 ```
 4. Run command:
 ```bash
-ansible-playbook 09-mariadb-password.yml --vault-password-file vault_pass.txt
+ansible-playbook ~/Desktop/devops24/examinations/09/09-mariadb-password.yml --vault-password-file vault_pass.txt
 ```
 
 

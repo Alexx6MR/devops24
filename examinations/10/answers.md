@@ -2,8 +2,8 @@
 To complete this task we just need to convert the static nginx configuration file into a Jinja2 template and then use the template module instead of copy.
 
 1. Create a new folder called `templates` inside your working directory and copy the original configuration file `example.internal.conf` from examination 6.
-Rename it as:
 
+Rename it as:
 ```bash
     templates/example.internal.conf.j2
 ```
@@ -16,7 +16,6 @@ Rename it as:
 > note: `ansible_default_ipv4.address` is automatically discovered by Ansible when it gathers system facts. It contains the main IPv4 address of the remote host.
 
 3. Make a new playbook and add something like this:
-
 ```yml
 ---
 - name: Configure nginx using a template
@@ -42,7 +41,7 @@ Rename it as:
 
 4. Run the command and check the website.
 ```bash
-    ansible-playbook 10-web-template.yml
+  ansible-playbook ~/Desktop/devops24/examinations/10/10-web-template.yml
 ```
 
 5. To verify that everything went well, you just need to connect to the server and then verify the file.

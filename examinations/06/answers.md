@@ -2,7 +2,7 @@
 
 1. One task to create the directory structure under `/var/www/example.internal/html/`.
 
-```bash
+```yml
  - name: Create directory structure for example.internal
       ansible.builtin.file:
         path: /var/www/example.internal/html
@@ -11,7 +11,7 @@
 ```
 2. One task to upload our `files/index.html` file to `/var/www/example.internal/html/index.html`.
 
-```bash
+```yml
  - name: Ensure the index.html file is uploded for nginx
       ansible.builtin.copy:
         src: files/index.html
@@ -23,8 +23,8 @@
 ```
 
 ## QUESTION B
-Using "register+when" works for small cases, but in a real production environment, using controllers is recommended. Using "register+when" repeats logic, is fragile, and can cause unnecessary or multiple restarts in the same run. Controllers add changes and restart only once.
+Using `register+when` works for small cases, but in a real production environment, using `controllers` is recommended. Using `register+when` repeats logic, is fragile, and can cause unnecessary or multiple restarts in the same run. Controllers add changes and restart only once.
 
 
 ## BONUS QUESTION 
-Personally, I would store the results of tasks that might require a restart in variables and prioritize them from most to least important. Then, I would place the restart step at the end of the playbook and only perform it if necessary.
+Personally I would store the results of the tasks that might require a restart in variables and prioritize them from most to least important. Then, I would place the restart step at the end of the playbook and only perform it if necessary.

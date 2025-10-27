@@ -1,7 +1,8 @@
 ## QUESTION A
 
-The ansible.builtin.debug module prints messages or variable values to help see what Ansible is doing.
+The `ansible.builtin.debug` module prints messages or variable values to help see what Ansible is doing.
 
+**output**
 ```bash
 ok: [webserver] => {
     "ansible_facts.hostname": "webserver"
@@ -9,16 +10,12 @@ ok: [webserver] => {
 ```
 
 ## QUESTION B
-ansible_facts is a dictionary of system information that Ansible automatically collects from each host before running tasks (via the setup module).
-
-```bash
-
-```
+The `ansible_facts` is a dictionary of system information that Ansible automatically collects from each host before running tasks. Contain information such as operating systems, IP addresses, attached filesystems, etc.
 
 ## QUESTION  C
-To remove the same software you installed, set state: absent in the playbook.
+To remove the same software you installed, set the state field from `present` to `absent` in the playbook.
 
-```bash
+```yml
 ---
 - name: Uninstall packages
   hosts: all
