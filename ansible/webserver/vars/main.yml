@@ -1,2 +1,18 @@
 ---
-# vars file for webserver
+users:
+  - username: alovelace
+    realname: alfred lovelace
+    password: 'password'
+    groups: wheel,audio,video
+  - username: aturing
+    realname: anhia turing
+    password: 'password'
+    groups: tape
+  - username: edijkstra
+    realname: eddie dijkstra
+    password: 'password'
+    groups: tcpdump
+  - username: ghopper
+    realname: george hopper
+    password: 'password'
+    groups: wheel,audio

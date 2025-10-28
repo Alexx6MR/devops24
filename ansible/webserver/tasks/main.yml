@@ -50,7 +50,7 @@
   ansible.builtin.user:
     name: "{{ item.username }}"
     comment: "{{ item.realname }}" # <- GECOS is here
-    password: "{{ users_passwords[item.username] | password_hash('sha512') }}"
+    password: "{{ item.password | password_hash('sha512') }}"
     state: present
     groups: "{{ item.groups }}"
     append: false # secures exactly those groups (idempotent)
