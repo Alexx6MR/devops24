@@ -16,5 +16,4 @@
         groups: "{{ item.groups }}"
         append: false # secures exactly those groups (idempotent)
         create_home: true
-
       loop: "{{ users }}"

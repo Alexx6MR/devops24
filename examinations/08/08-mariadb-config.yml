@@ -3,7 +3,7 @@
   hosts: dbserver
   become: true
   tasks:
-    - name: Ensure PyMySQL driver is present (required by community.mysql)
+    - name: Ensure PyMySQL driver is present
       ansible.builtin.package:
         name: python3-PyMySQL
         state: present

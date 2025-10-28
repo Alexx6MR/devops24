@@ -10,24 +10,49 @@
     enabled: true
     state: started
 
+- name: Ensure https certificate is installed
+  include_tasks: install-cert.yml
+
 - name: Copy https file into nginx
   ansible.builtin.copy:
     src: files/https.conf
     dest: /etc/nginx/conf.d/
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Create directory structure for example.internal
   ansible.builtin.file:
     path: /var/www/example.internal/html
     state: directory
+    owner: root
+    group: root
     mode: '0755'
 
 - name: Copy nginx configuration template
   ansible.builtin.template:
-    src: files/example.internal.conf.j2
+    src: templates/example.internal.conf.j2
     dest: /etc/nginx/conf.d/example.internal.conf
-  
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Ensure web content present
   ansible.builtin.copy:
     src: files/index.html
     dest: /var/www/example.internal/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
   notify: Reload nginx
+
+- name: Ensure users exist with required supplementary groups
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    comment: "{{ item.realname }}" # <- GECOS is here
+    password: "{{ users_passwords[item.username] | password_hash('sha512') }}"
+    state: present
+    groups: "{{ item.groups }}"
+    append: false # secures exactly those groups (idempotent)
+    create_home: true
+  loop: "{{ users }}"

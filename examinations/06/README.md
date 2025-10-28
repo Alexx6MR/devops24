@@ -24,7 +24,7 @@ content depending on which address it is called by via web browsers.
 ## Configure the nginx virtual host
 
 The virtual host we will create will be called "example.internal", so that when we
-go to http://example.ínternal or https://example.internal, our own web page
+go to http://example.internal or https://example.internal, our own web page
 will be displayed instead. Obviously, this is a fake address, so we need
 to do some black magic on our own machines first.
 

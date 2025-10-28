@@ -1,0 +1,13 @@
+users:
+  - username: alovelace
+    realname: alfred lovelace
+    groups: wheel,audio,video
+  - username: aturing
+    realname: anhia turing
+    groups: tape
+  - username: edijkstra
+    realname: eddie dijkstra
+    groups: tcpdump
+  - username: ghopper
+    realname: george hopper
+    groups: wheel,audio

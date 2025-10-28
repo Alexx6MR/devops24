@@ -10,7 +10,7 @@
     enabled: true
     state: started
 
-- name: Ensure PyMySQL driver is present (required by community.mysql)
+- name: Ensure PyMySQL driver is present
   ansible.builtin.package:
     name: python3-PyMySQL
     state: present
@@ -31,3 +31,10 @@
     host: "%"
     login_unix_socket: "/var/lib/mysql/mysql.sock"
     check_implicit_admin: true
+
+- name: Transfer files to dbserver
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/home/deploy/{{ item | basename }}"
+  with_fileglob:
+    - "files/*.md"
